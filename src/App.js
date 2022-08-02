@@ -12,7 +12,6 @@ function App() {
         <p>
           Run <br/><code>git pull</code> <br/>and <br/><code>npm install</code>
         </p>
-
       </header>
     </div>
   );
