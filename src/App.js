@@ -1,20 +1,19 @@
-import logo from './logo.svg';
+import {Route, Routes} from "react-router-dom";
 import './App.css';
+import Home from "./public/home";
+import Header from "./component/header.component";
+import Footer from "./component/footer.component";
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          CPC Website
-        </p>
-        <p>
-          Run <br/><code>git pull</code> <br/>and <br/><code>npm install</code>
-        </p>
-      </header>
-    </div>
-  );
+    return (
+        <div className='w-screen overflow-x-hidden'>
+            <Header/>
+            <Routes>
+                <Route path="/" element={<Home/>}/>
+            </Routes>
+            <Footer />
+        </div>
+    );
 }
 
 export default App;
