@@ -35,7 +35,7 @@ const Home = () => {
                 </div>
             </section>
 
-            <section className={'bg-gray-200 py-12 px-4 w-full bg-white relative px-16'} style={{maxHeight: "100vh"}}>
+            <section className={'bg-gray-200 py-12  w-full relative px-16'} style={{maxHeight: "100vh"}}>
                 <div className="max-w-7xl mx-auto">
                     <h1 className={'font-extrabold text-2xl lg:text-4xl mb-8'}>The Lineup of Events</h1>
 
@@ -117,7 +117,7 @@ const Home = () => {
                                 Celebrate in Pixels
                             </span>
                         </h1>
-                        <a href="#" className='underline py-1 lg:pl-6 lg:text-xl'>View the Ladies & Gents</a>
+                        <a href="/portrait-pictures" className='underline py-1 lg:pl-6 lg:text-xl'>View the Ladies & Gents</a>
                     </div>
                 </div>
 
