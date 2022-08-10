@@ -10,7 +10,7 @@
 .h-full {
     height: calc(100vh - 38px);
 }
-
+*{font-family: Helvetica, sans-serif}
 .no-scrollbar::-webkit-scrollbar {
     width: 0;
 }
