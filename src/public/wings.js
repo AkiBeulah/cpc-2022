@@ -73,16 +73,15 @@ const Voting = () => {
                     email: formData.email,
                     data: JSON.stringify(formData.data)
                 }),
-                {headers: {'content-type': 'application/x-www-form-urlencoded'}})
+                {headers: {'content-type': 'application/x-www-form-urlencoded'}}
+            )
                 .then(() => {
+                    alert('You have successfully submitted your votes, please check your email for a confirmation link within the next hour, if not please try again.\nPlease you can only vote once!')
+                    window.location.href = "/"
                 })
                 .catch(() => {
                     alert('Something seems to have gone wrong, you may have used this email to vote already. \nPlease contact a CPC executive on any of the official platforms if problem persists.')
                 })
-
-            alert('You have successfully submitted your votes, please check your email for a confirmation link within the next hour, if not please try again.\nPlease you can only vote once!')
-            console.log(1)
-            setTimeout(() => (window.location.href = "/"), 5000)
         } else {
             alert("Please make sure to use a Covenant University Email an to vote for each category!")
         }
