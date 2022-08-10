@@ -11,15 +11,13 @@ app.use(bodyParser.urlencoded({
 app.use(cors());
 
 // API
-const events = require('./api/events')
-const portraits = require('./api/portraits')
-const souvenirs = require('./api/souvenirs')
-const votings = require('./api/votings')
+// const api = require('./api/api')
 
 // app.use('/api/events', events)
 // app.use('/api/portraits', portraits)
 // app.use('/api/souvenirs', souvenirs)
-// app.use('/api/votings', votings)
+app.use('/api/information', require('./api/api'))
+app.use('/api/voting', require('./api/votings'))
 
 app.use(express.static(path.join(__dirname, '../build')))
 app.get('*', (req, res) => {

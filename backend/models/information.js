@@ -1,17 +1,12 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
-const voting = new Schema({
-    email: {
+const information = new Schema({
+    title: {
         type: String,
         index: true,
         unique: true,
         required: true
-    },
-    confirmation: {
-      type: Boolean,
-      default: false,
-      required: true
     },
     data: {
         type: String,
@@ -22,4 +17,4 @@ const voting = new Schema({
         default: Date.now
     }
 })
-module.exports = mongoose.model("Voting", voting, "voting")
+module.exports = mongoose.model("Information", information, "information")

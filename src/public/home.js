@@ -1,21 +1,23 @@
 import React from 'react'
 
-import backdrop from '../assets/backdrop.webp'
+import backdrop from '../assets/images/backdrop.webp'
+import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
+import {faSearch} from "@fortawesome/free-solid-svg-icons";
 
-const Home = () => {
+const Home = (props) => {
 
 
     return (
         <>
             <section
-                className="py-24 max-w-7xl mx-auto px-16 lg:px-2 w-full bg-white h-screen relative flex flex-col justify-center">
+                className="py-24 max-w-7xl mx-auto px-16 lg:px-8 w-full bg-white h-screen relative flex flex-col justify-center">
                 <div className="relative z-10">
                     <div className="">
-                        <h1 className={'text-base lg:text-2xl mb-8'}>
+                        <h1 className={'text-base lg:text-2xl mb-8 text-purple-600'}>
                             #The17thSet.
                         </h1>
 
-                        <h1 className='font-extrabold text-2xl lg:text-6xl mb-8'>
+                        <h1 className='font-extrabold text-2xl lg:text-4xl mb-8'>
                             Graduation is here.
                             <br/>
                             <br/>
@@ -25,13 +27,16 @@ const Home = () => {
                     </div>
 
                     <div className="">
-                        <div className="bg-black rounded-lg h-20 w-3/4 mb-12"/>
+                        <div className="h-20 w-3/4 mb-12 relative">
+                            <input type="text" value={""} onClick={() => props.setOp(true)} onChange={() => props.setOp(true)} className={"w-full h-20 px-4 py-2 rounded-lg outline-none border border-gray-600"} />
+                            <span className="absolute text-5xl top-1/2 transform -translate-y-1/2 right-6 text-gray-600"><FontAwesomeIcon icon={faSearch} /></span>
+                        </div>
                         <div className="bg-gray-200 h-20 w-2/4"/>
                     </div>
                 </div>
                 <div
-                    className="absolute w-11/12 lg:w-1/3 top-1/2 right-1/2 lg:right-0 transform  translate-x-1/2 lg:translate-x-0 -translate-y-1/2 z-0">
-                    <img src={backdrop} className={'w-full lg:w-2/3 '} alt={'Backdrop image'}/>
+                    className="absolute w-11/12 lg:w-2/4 top-1/2 right-1/2 lg:right-8 transform translate-x-1/2 lg:translate-x-0 -translate-y-1/2 z-0">
+                    <img src={backdrop} className={'w-full lg:w-2/3 lg:ml-auto'} alt={'Backdrop image'}/>
                 </div>
             </section>
 
@@ -44,8 +49,10 @@ const Home = () => {
 
                         </div>
 
-                        <div className="my-8 md:my-0 overflow-y-scroll h-full py-4 md:py-0 col-span-8"
+                        <div className="my-8 md:my-0 overflow-y-scroll h-full py-4 md:py-0 col-span-8 no-scrollbar"
                              style={{maxHeight: "560px"}}>
+                            <div className="bg-black w-full h-12 lg:h-24 mb-2"/>
+                            <div className="bg-black w-full h-12 lg:h-24 mb-2"/>
                             <div className="bg-black w-full h-12 lg:h-24 mb-2"/>
                             <div className="bg-black w-full h-12 lg:h-24 mb-2"/>
                             <div className="bg-black w-full h-12 lg:h-24 mb-2"/>

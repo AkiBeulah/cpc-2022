@@ -1,3 +1,78 @@
+@font-face {
+    font-family: 'alumniSansInlineOne';
+    src: local('alumniSansInlineOne'), url(./assets/fonts/alumniSansInlineOne.ttf) format("truetype");
+}
+
+.font-thickums {
+    font-family: alumniSansInlineOne, fangsong;
+}
+
 .h-full {
-    height: calc(100vh - 37.84px);
+    height: calc(100vh - 38px);
+}
+
+.no-scrollbar::-webkit-scrollbar {
+    width: 0;
+}
+
+#bar1,
+#bar2 {
+    content: " ";
+    height: 4px;
+    width: 24px;
+    border-radius: 12px;
+    margin: 4px 0;
+}
+#bar1.transformed {
+    animation: bar1-transformed 800ms ease-in-out 100ms 1 forwards;
+}
+#bar1.untransformed {
+    animation: bar1-transformed 800ms ease-in-out 100ms 1 reverse;
+}
+#bar2.transformed {
+    animation: bar2-transformed 800ms ease-in-out 100ms 1 forwards;
+}
+#bar2.untransformed {
+    animation: bar2-transformed 800ms ease-in-out 100ms 1 reverse;
+}
+@keyframes bar1-transformed {
+    0% {
+        transform: none;
+        margin: 4px 0;
+    }
+    50% {
+        margin: 0;
+        transform: translateY(2px);
+    }
+    100% {
+        margin: 0;
+        transform: translateY(2px) rotate(45deg);
+    }
+}
+@keyframes bar2-transformed {
+    0% {
+        margin: 4px 0;
+        transform: none;
+    }
+    50% {
+        margin: 0;
+        transform: translateY(-2px);
+    }
+    100% {
+        margin: 0;
+        transform: translateY(-2px) rotate(-45deg);
+    }
+}
+.bar1-transformed {
+    margin: 0;
+    transform: translateY(2px) rotate(45deg);
+}
+.bar2-transformed {
+    margin: 0;
+    transform: translateY(-2px) rotate(-45deg);
+}
+
+.wings-radio-input input[type="radio"]:checked + label {
+    background: #16A34A;
+    transform: scale(105%);
 }
