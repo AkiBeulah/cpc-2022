@@ -1,5 +1,5 @@
 import React from 'react';
-import logo from "../assets/logo.webp";
+import logo from "../assets/images/logo.webp";
 
 const Footer = (props) => {
     return (
@@ -47,7 +47,7 @@ const defaultFooter =
                             <li className={"pt-2 uppercase"}><a className=""
                                                                 href="/souvenirs">souvenirs</a></li>
                             <li className={"pt-2 uppercase"}><a className=""
-                                                                href="/wings">Wings Awards</a></li>
+                                                                href="/wings.js">Wings Awards</a></li>
                         </ul>
                     </div>
                     <div className={' flex flex-col justify-end'}>

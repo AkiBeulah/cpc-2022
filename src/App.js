@@ -3,13 +3,22 @@ import './App.css';
 import Home from "./public/home";
 import Header from "./component/header.component";
 import Footer from "./component/footer.component";
+import Voting from "./public/wings";
+import VotingConfirmation from "./public/wingsConfirmation";
+import {useState} from "react";
+import Modal from 'react-modal'
 
 function App() {
+    const [op, setOp] = useState(false)
+    Modal.setAppElement('#root');
+
     return (
-        <div className='w-screen overflow-x-hidden'>
-            <Header/>
+        <div>
+            <Header op={op} setOp={setOp} />
             <Routes>
-                <Route path="/" element={<Home/>}/>
+                <Route path="/" element={<Home op={op} setOp={setOp} />}/>
+                <Route path="/wings" element={<Voting />}/>
+                <Route path="/wings_confirmation/:id" element={<VotingConfirmation />}/>
             </Routes>
             <Footer />
         </div>
