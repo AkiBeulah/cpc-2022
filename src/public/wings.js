@@ -5,6 +5,8 @@ import axios from "axios";
 import Modal from "react-modal";
 import {faInstagram, faTwitter} from "@fortawesome/free-brands-svg-icons";
 
+var qs = require('qs');
+
 const Voting = () => {
     const [red, setRed] = useState(false)
     const [formData, setFormData] = useState({
@@ -36,7 +38,6 @@ const Voting = () => {
                 setWingsDetails(JSON.parse(res.data.data)[0])
             })
     }, [])
-
     useEffect(() => {
         let thumbsUp = document.querySelector('#thumbsUp')
         let thumbsUpInput = document.querySelector('#thumbsUpInput')
@@ -54,7 +55,6 @@ const Voting = () => {
             }, 800)
         }
     }, [red])
-
     useEffect(() => {
         let emailRegEx = new RegExp('[a-zA-Z]+.[a-zA-Z]+@(stu.cu.edu.ng|covenantuniversity.edu.ng)')
 
@@ -63,6 +63,30 @@ const Voting = () => {
         }
     }, [formData])
 
+    const submit = () => {
+        let emailRegEx = new RegExp('[a-zA-Z]+.[a-zA-Z]+@(stu.cu.edu.ng|covenantuniversity.edu.ng)')
+
+        if (Object.keys(formData.data).length === 16 && emailRegEx.test(formData.email)) {
+            axios.post(
+                '/api/voting/',
+                qs.stringify({
+                    email: formData.email,
+                    data: JSON.stringify(formData.data)
+                }),
+                {headers: {'content-type': 'application/x-www-form-urlencoded'}})
+                .then(() => {
+                })
+                .catch(() => {
+                    alert('Something seems to have gone wrong, you may have used this email to vote already. \nPlease contact a CPC executive on any of the official platforms if problem persists.')
+                })
+
+            alert('You have successfully submitted your votes, please check your email for a confirmation link within the next hour, if not please try again.\nPlease you can only vote once!')
+            console.log(1)
+            setTimeout(() => (window.location.href = "/"), 5000)
+        } else {
+            alert("Please make sure to use a Covenant University Email an to vote for each category!")
+        }
+    }
     const findPos = (obj) => {
         let curtop = 0;
         if (obj.offsetParent) {
@@ -72,7 +96,6 @@ const Voting = () => {
             return [curtop];
         }
     }
-
     const updateFormData = (n, v) => {
         setFormData(formData => ({...formData, [n]: v}))
     }
@@ -86,11 +109,9 @@ const Voting = () => {
             })
         )
     }
-
     const updateModalData = (n, v) => {
         setModalData(modalData => ({...modalData, [n]: v}))
     }
-
     const titleParser = (title) => {
         if (title) {
             let t = title.indexOf('__') > -1 ? title.replaceAll('__', ' (') + ")" : title
@@ -111,7 +132,8 @@ const Voting = () => {
                     icon={faTimes}/></h2>
                 <h2 className={'text-center uppercase mb-8 font-thickums text-4xl'}>{titleParser(modalData.title)}</h2>
 
-                <div className="overflow-x-scroll lg:overflow-x-hidden lg:overflow-y-scroll no-scrollbar py-2 px-2 w-full">
+                <div
+                    className="overflow-x-scroll lg:overflow-x-hidden lg:overflow-y-scroll no-scrollbar py-2 px-2 w-full">
                     <div
                         className={`flex flex-row lg:grid lg:grid-cols-3`}>
                         {wingsDetails[modalData.title] !== undefined &&
@@ -175,17 +197,20 @@ const Voting = () => {
                                     Object.keys(wingsDetails)[Object.keys(wingsDetails).indexOf(modalData.title) - 1]).replaceAll(" ", "<br/>")
                             }}/>
                         </span>
-                            <span className={'cursor-pointer capitalize flex flex-row items-center text-right'} onClick={() => updateModalData(
-                                "title",
-                                (Object.keys(wingsDetails).indexOf(modalData.title) + 1 >= Object.keys(wingsDetails).length) ?
-                                    Object.keys(wingsDetails)[0]
-                                    :
-                                    Object.keys(wingsDetails)[Object.keys(wingsDetails).indexOf(modalData.title) + 1]
-                            )}>
-                        <span className={'pr-2'} dangerouslySetInnerHTML={{"__html": titleParser((Object.keys(wingsDetails).indexOf(modalData.title) + 1 >= Object.keys(wingsDetails).length) ?
+                            <span className={'cursor-pointer capitalize flex flex-row items-center text-right'}
+                                  onClick={() => updateModalData(
+                                      "title",
+                                      (Object.keys(wingsDetails).indexOf(modalData.title) + 1 >= Object.keys(wingsDetails).length) ?
+                                          Object.keys(wingsDetails)[0]
+                                          :
+                                          Object.keys(wingsDetails)[Object.keys(wingsDetails).indexOf(modalData.title) + 1]
+                                  )}>
+                        <span className={'pr-2'} dangerouslySetInnerHTML={{
+                            "__html": titleParser((Object.keys(wingsDetails).indexOf(modalData.title) + 1 >= Object.keys(wingsDetails).length) ?
                                 Object.keys(wingsDetails)[0].replaceAll(" ", "<br/>")
                                 :
-                                Object.keys(wingsDetails)[Object.keys(wingsDetails).indexOf(modalData.title) + 1]).replaceAll(" ", "<br/>")}} />
+                                Object.keys(wingsDetails)[Object.keys(wingsDetails).indexOf(modalData.title) + 1]).replaceAll(" ", "<br/>")
+                        }}/>
                         <FontAwesomeIcon icon={faChevronRight}/>
                         </span>
                         </>
@@ -235,22 +260,38 @@ const Voting = () => {
 
                 <div id={"cats"} className="mt-12 grid grid-cols-1 lg:grid-cols-3 gap-4">
                     {
-                        Object.keys(wingsDetails).map((i, k) =>
-                            <div key={k}
-                                 onClick={() => {
-                                     updateModalData('title', i)
-                                     updateModalData('isOpen', true)
-                                 }}
-                                 className={"bg-gray-900 h-24 text-center flex justify-center items-center uppercase w-full text-white font-thickums text-3xl cursor-pointer transition-all duration-300 " + (Object.keys(formData.data).includes(i) ? "bg-green-600" : "")}>
-                                {titleParser(i)}
-                            </div>
-                        )
+                        Object.entries(wingsDetails).length === 0 ?
+                            <>
+                                <div
+                                    style={{minHeight: "96px"}}
+                                    className={"bg-gray-400 text-center flex justify-center items-center uppercase w-full text-white font-thickums text-3xl cursor-pointer transition-all duration-300 animate-pulse"}/>
+                                <div
+                                    style={{minHeight: "96px"}}
+                                    className={"bg-gray-400 text-center flex justify-center items-center uppercase w-full text-white font-thickums text-3xl cursor-pointer transition-all duration-300 animate-pulse"}/>
+                                <div
+                                    style={{minHeight: "96px"}}
+                                    className={"bg-gray-400 text-center flex justify-center items-center uppercase w-full text-white font-thickums text-3xl cursor-pointer transition-all duration-300 animate-pulse"}/>
+
+                            </>
+                            :
+                            Object.keys(wingsDetails).map((i, k) =>
+                                <div key={k}
+                                     onClick={() => {
+                                         updateModalData('title', i)
+                                         updateModalData('isOpen', true)
+                                     }}
+                                     className={"bg-gray-900 h-24 text-center flex justify-center items-center uppercase w-full text-white font-thickums text-3xl cursor-pointer transition-all duration-300 " + (Object.keys(formData.data).includes(i) ? "bg-green-600" : "")}>
+                                    {titleParser(i)}
+                                </div>
+                            )
                     }
                 </div>
             </section>
 
             <div className={'max-w-7xl mx-auto p-8'}>
-                <button className={'bg-gray-900 mx-auto text-xl transition-all duration-300 py-2 px-4 ' + (Object.keys(formData.data).length === 16 ? " w-fit text-white rounded-lg mx-auto font-extrabold" : "w-full text-gray-800")}>Submit</button>
+                <button onClick={submit}
+                        className={'bg-gray-900 mx-auto text-xl transition-all duration-300 py-2 px-4 ' + (Object.keys(formData.data).length === 16 ? " w-fit text-white rounded-lg mx-auto font-extrabold" : "w-full text-gray-800")}>Submit
+                </button>
             </div>
         </>
     )
