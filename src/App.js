@@ -3,6 +3,8 @@ import './App.css';
 import Home from "./public/home";
 import Header from "./component/header.component";
 import Footer from "./component/footer.component";
+import Portrait from "./public/portraits";
+import Pictures from "./public/pictures";
 import Voting from "./public/wings";
 import VotingConfirmation from "./public/wingsConfirmation";
 import {useState} from "react";
@@ -19,6 +21,8 @@ function App() {
                 <Route path="/" element={<Home op={op} setOp={setOp} />}/>
                 <Route path="/wings" element={<Voting />}/>
                 <Route path="/wings_confirmation/:id" element={<VotingConfirmation />}/>
+                <Route path="/portrait-pictures" element={<Portrait/>}/>
+                <Route path="/pictures/:collegeName" element={<Pictures/>}/>
             </Routes>
             <Footer />
         </div>
