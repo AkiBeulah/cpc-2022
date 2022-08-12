@@ -11,20 +11,24 @@ app.use(bodyParser.urlencoded({
 app.use(cors());
 
 // API
-const events = require('./api/events')
-const portraits = require('./api/portraits')
-const souvenirs = require('./api/souvenirs')
-const votings = require('./api/votings')
+// const api = require('./api/api')
 
 // app.use('/api/events', events)
 // app.use('/api/portraits', portraits)
 // app.use('/api/souvenirs', souvenirs)
-// app.use('/api/votings', votings)
+app.use('/api/information', require('./api/api'))
+app.use('/api/voting', require('./api/votings'))
 
-app.use(express.static(path.join(__dirname, '../build')))
-app.get('*', (req, res) => {
-    res.sendFile(path.join(__dirname, '../build'))
-})
+if (process.env.NODE_ENV === "production") {
+    app.use(express.static("build"));
+    app.get("*", (req, res) => {
+        res.sendFile(path.resolve(__dirname, "build", "index.html"));
+    });
+}
+// app.use(express.static(path.join(__dirname, '../build')))
+// app.get('*', (req, res) => {
+//     res.sendFile(path.join(__dirname, '../build'))
+// })
 
 const port = process.env.PORT || 5000;
 app.listen(port, () => {
