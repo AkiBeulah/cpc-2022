@@ -1,4 +1,5 @@
 import React,{useState} from 'react';
+
 import College from '../component/college.component';
 
 
@@ -11,16 +12,16 @@ const Portrait = () => {
     function college(x){
         switch(x){
             case 'cst' : return cst.map((i) =>
-           <College/>
-          );;
+           <College college= "CST: College of Science & Technology"/>
+          );
             case 'cmss' : return cmss.map((i) =>
-            <College/>
+            <College college= "CMSS: College of Management & Social Sciences"/>
           );
             case 'clds' : return clds.map((i) =>
-            <College/>
+            <College college= "CLDS: College of Leadership & Developmental Studies"/>
           );
             default : return coe.map((i) =>
-            <College/>
+            <College college= "COE: College of Engineering"/>
           );
         }
     }
@@ -41,7 +42,7 @@ const Portrait = () => {
                 <div className="max-w-7xl mx-auto">
                     <h1 className={'text-2xl lg:text-4xl mb-8'}>College of Engineering</h1>
 
-                    <div className="w-full grid  gap-12 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 ">
+                    <div className="w-full grid  gap-10 my-5 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 ">
                         {college()}
                     </div>
                 </div>
@@ -75,7 +76,7 @@ const Portrait = () => {
                 </div>
             </section>
 
-           
+        
         </>
     )
 }
