@@ -22,6 +22,7 @@ function App() {
                 <Route path="/wings" element={<Voting />}/>
                 <Route path="/wings_confirmation/:id" element={<VotingConfirmation />}/>
                 <Route path="/portrait-pictures" element={<Portrait/>}/>
+                {/**There's an issue with this particular route */}
                 <Route path="/pictures/:collegeName" element={<Pictures/>}/>
             </Routes>
             <Footer />

@@ -197,7 +197,7 @@ const Header = (props) => {
 const HeaderLink = ({link, text, scroll, scrollLimit}) => {
     return (
         <li className="nav-item">
-            <a className={"px-3 py-2 flex items-center text-xs uppercase font-bold leading-snug border border-transparent transition-all duration-200 hover:underline hover:opacity-75 " + (scroll > scrollLimit ? "text-gray-800" : "text-base text-gray-800")}
+            <a className={"px-3 py-2 flex items-center text-xs uppercase font-bold leading-snug border border-transparent transition-all duration-200 hover:underline hover:text-purple-600 " + (scroll > scrollLimit ? "text-gray-800" : "text-base text-gray-800")}
                href={link}>
                 <span className="">{text}</span>
             </a>
