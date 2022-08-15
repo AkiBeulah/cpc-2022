@@ -19,12 +19,10 @@ app.use(cors());
 app.use('/api/information', require('./api/api'))
 app.use('/api/voting', require('./api/votings'))
 
-if (process.env.NODE_ENV === "production") {
-    app.use(express.static(path.join(__dirname, "build")));
-    app.get("*", (req, res) => {
-        res.sendFile(path.resolve(__dirname, "build", "index.html"));
-    });
-}
+app.use(express.static(path.join(__dirname, '../build')))
+app.get('*', (req, res) => {
+    res.sendFile(path.join(__dirname, '../build', 'index.html'))
+})
 // app.use(express.static(path.join(__dirname, '../build')))
 // app.get('*', (req, res) => {
 //     res.sendFile(path.join(__dirname, '../build'))
