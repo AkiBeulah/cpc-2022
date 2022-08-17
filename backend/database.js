@@ -1,5 +1,6 @@
 const mongoose = require('mongoose');
-const connection = "mongodb+srv://head-of-tech:8F2FVl44XMWXBIfF@cluster0.1wfkzsd.mongodb.net/?retryWrites=true&w=majority";
+require("dotenv").config()
+const connection = `mongodb+srv://${process.env.DB_USERNM}:${process.env.DB_PSSWRD}@cluster0.1wfkzsd.mongodb.net/?retryWrites=true&w=majority`;
 
 mongoose.connect(connection, {
     useNewUrlParser: true,

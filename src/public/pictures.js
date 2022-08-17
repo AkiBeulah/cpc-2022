@@ -4,10 +4,11 @@ import Polariod from '../component/polariod.component';
 
 
 const Pictures = () => {
-    const [coursePictures, setCoursePictures] = useState([1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24]);
+    const [coursePictures, setCoursePictures] = useState([]);
     let params = useParams()
     useEffect(()=>{
-        window.scrollTo(0,0);
+        //window.scrollTo(0,0);
+        setCoursePictures([1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24])
     },[])
     return (
         <>

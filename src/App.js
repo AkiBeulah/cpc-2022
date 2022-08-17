@@ -9,6 +9,7 @@ import Voting from "./public/wings";
 import VotingConfirmation from "./public/wingsConfirmation";
 import {useState} from "react";
 import Modal from 'react-modal'
+import Souvenirs from "./public/sovenirs";
 
 function App() {
     const [op, setOp] = useState(false)
@@ -22,6 +23,7 @@ function App() {
                 <Route path="/wings" element={<Voting />}/>
                 <Route path="/wings_confirmation/:id" element={<VotingConfirmation />}/>
                 <Route path="/portrait-pictures" element={<Portrait/>}/>
+                <Route path="/souvenirs" element={<Souvenirs/>}/>
                 {/**There's an issue with this particular route */}
                 <Route path="/pictures/:collegeName" element={<Pictures/>}/>
             </Routes>
