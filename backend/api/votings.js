@@ -12,7 +12,7 @@ const emailRegEx = new RegExp('[a-zA-Z]+.[a-zA-Z]+@(stu.cu.edu.ng|covenantuniver
 // const matricNoRegEx = new RegExp("[0-9]{2}[a-zA-Z]{2}[0-9]{5,6}\\b")
 router.post('/', (req, res) => {
     console.log("voting")
-    const {email, data} = req.body;
+    const { email, data } = req.body;
     if (!emailRegEx.test(email)) {
         return res.status(400).json({
             "message": "This is not a Covenant University Email"
@@ -25,22 +25,21 @@ router.post('/', (req, res) => {
     })
 
     newVote.save()
-        .then((res) => {
-            console.log(res._id.toString())
-            mailer([email], "Confirmation on submitted votes!", res._id.toString())
-                .then((resp) => {
-                    return resp.status(201).json({
-                        message: "Your votes have been successfully submitted!"
-                    })
+        .then((resp) => {
+            try {
+                mailer([email], "Confirmation on submitted votes!", resp._id.toString())
+                return res.status(201).json({
+                    message: "Your votes have been successfully submitted!"
                 })
-                .catch(err => {
+            } catch (err) {
                 console.log(err)
 
                 return res.status(400).json({
                     "error": err,
                     "message": "Something went wrong please try again!"
                 })
-            })
+
+            }
         })
         .catch(err => {
             console.log(err)
@@ -57,7 +56,7 @@ router.patch('/:id', (req, res) => {
     console.log('updating')
     Voting.findByIdAndUpdate(id, {
         confirmation: true
-    }, {new: true}, (e, i) => {
+    }, { new: true }, (e, i) => {
         if (e) return res.status(400).json({
             "message": "Sorry Something went wrong!"
         })
@@ -73,7 +72,7 @@ router.get('/:id', (req, res) => {
     })
 })
 
-async function mailer(recipient, subject, id) {
+async function mailer(recipient = "headtechcpc@covenantuniversity.edu.ng", subject, id) {
     const filePath = path.join(__dirname, '../templates/voting_confirmation_mail_template.html');
     const source = fs.readFileSync(filePath, 'utf-8').toString();
     const template = handlebars.compile(source);
@@ -92,19 +91,6 @@ async function mailer(recipient, subject, id) {
             pass: process.env.MAILER_PSSWD,
         },
     });
-
-    // let testAccount = await nodemailer.createTestAccount();
-    //
-    // // create reusable transporter object using the default SMTP transport
-    // let transporter = nodemailer.createTransport({
-    //     host: "smtp.ethereal.email",
-    //     port: 587,
-    //     secure: false, // true for 465, false for other ports
-    //     auth: {
-    //         user: testAccount.user, // generated ethereal user
-    //         pass: testAccount.pass, // generated ethereal password
-    //     },
-    // });
 
     let info = await transporter.sendMail({
         from: '"Akindele Beulah O." <headtechcpc@covenantuniversity.edu.ng>',
