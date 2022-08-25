@@ -11,7 +11,6 @@ const path = require('path');
 const emailRegEx = new RegExp('[a-zA-Z]+.[a-zA-Z]+@(stu.cu.edu.ng|covenantuniversity.edu.ng)')
 // const matricNoRegEx = new RegExp("[0-9]{2}[a-zA-Z]{2}[0-9]{5,6}\\b")
 router.post('/', (req, res) => {
-    console.log("voting")
     const { email, data } = req.body;
     if (!emailRegEx.test(email)) {
         return res.status(400).json({
