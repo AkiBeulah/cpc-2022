@@ -13,7 +13,7 @@ const Souvenirs = () => {
                     <h1 className=' text-4xl font-bold'>The Goodies are here</h1>
                 </div>
                 <div className=" ">
-                    <p>IBIDAPO</p>
+                    
                 </div>
             </section>
 
@@ -21,7 +21,7 @@ const Souvenirs = () => {
 
             <section className=" py-12">
                 <div className=" ">
-                    <p>IBIDAPO</p>
+                    
                 </div>
             </section>
 
