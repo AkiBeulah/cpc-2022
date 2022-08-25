@@ -5,8 +5,9 @@ import Header from "./component/header.component";
 import Footer from "./component/footer.component";
 import Portrait from "./public/portraits";
 import Pictures from "./public/pictures";
-import Voting from "./public/wings";
-import VotingConfirmation from "./public/wingsConfirmation";
+import LandingPage from "./public/landingPage"
+import Voting from "./public/wings_awards/wings"
+import VotingConfirmation from "./public/wings_awards/wingsConfirmation"
 import {useState} from "react";
 import Modal from 'react-modal'
 import Souvenirs from "./public/sovenirs";
