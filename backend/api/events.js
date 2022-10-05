@@ -14,6 +14,7 @@ router.post('/', (req, res) => {
         image_url: image_url,
         title: title,
         subtitle: subtitle,
+        link: link
     })
 
     newEvent.save()

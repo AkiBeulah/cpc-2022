@@ -3,6 +3,10 @@
     src: local('alumniSansInlineOne'), url(./assets/fonts/alumniSansInlineOne.ttf) format("truetype");
 }
 
+body {
+    letter-spacing: 0.1em;
+}
+
 .font-thickums {
     font-family: alumniSansInlineOne, fangsong;
 }
@@ -75,4 +79,7 @@
 .wings-radio-input input[type="radio"]:checked + label {
     background: #16A34A;
     transform: scale(105%);
+}
+.ReactModal__Overlay {
+    z-index: 999;
 }

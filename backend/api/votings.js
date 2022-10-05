@@ -3,6 +3,7 @@ const router = express.Router()
 require('dotenv').config();
 
 const Voting = require('../models/voting');
+const Nominee = require('../models/nominee');
 const nodemailer = require('nodemailer');
 const handlebars = require('handlebars');
 const fs = require('fs');
@@ -50,6 +51,33 @@ router.post('/', (req, res) => {
         })
 })
 
+router.post("/nominee", ((req, res) => {
+    const { category, image_url, fullname, twitter, instagram } = req.body
+
+    const newNominee = new Nominee({
+        category: category,
+        image_url: image_url,
+        fullname: fullname,
+        twitter: twitter,
+        instagram: instagram,
+    })
+
+    newNominee.save()
+        .then(() => {
+            return res.status(201).json({
+                message: "Your votes have been successfully submitted!"
+            })
+        })
+        .catch(err => {
+            console.log(err)
+
+            return res.status(400).json({
+                "error": err,
+                "message": "Something went wrong please try again!"
+            })
+        })
+}))
+
 router.patch('/:id', (req, res) => {
     const id = req.params.id
     console.log('updating')
@@ -71,7 +99,7 @@ router.get('/:id', (req, res) => {
     })
 })
 
-async function mailer(recipient = "headtechcpc@covenantuniversity.edu.ng", subject, id) {
+const mailer = async (recipient = "headtechcpc@covenantuniversity.edu.ng", subject, id) => {
     const filePath = path.join(__dirname, '../templates/voting_confirmation_mail_template.html');
     const source = fs.readFileSync(filePath, 'utf-8').toString();
     const template = handlebars.compile(source);
@@ -94,7 +122,7 @@ async function mailer(recipient = "headtechcpc@covenantuniversity.edu.ng", subje
     let info = await transporter.sendMail({
         from: '"Akindele Beulah O." <headtechcpc@covenantuniversity.edu.ng>',
         to: recipient,
-        subject: subject,
+        subject: "Confirmation on Submitted Votes!",
         text: "https://cpc-2022-alpha-testing.herokuapp.com/wings_confirmation/" + id,
         html: htmlToSend
     });

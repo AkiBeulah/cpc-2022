@@ -1,15 +1,51 @@
 import React from "react";
-import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
-import {faSearch} from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faSearch } from "@fortawesome/free-solid-svg-icons";
+import Confetti from 'react-confetti'
 
 import backdrop from '../assets/images/backdrop.webp'
+import { useEffect } from "react";
+import { useState } from "react";
+import axios from "axios";
 
 const LandingPage = (props) => {
+    const [windowSize, setWindowSize] = useState({
+        width: window.innerWidth,
+        height: window.innerHeight
+    })
+    const [events, setEvents] = useState([])
+
+    useEffect(() => {
+        window.addEventListener('resize', (e) => handleResize(e))
+
+        return (() => window.removeEventListener('resize', (e) => handleResize(e)))
+    }, [])
+
+    useEffect(() => {
+        axios.get('/api/events/')
+            .then(res => {
+                setEvents(res.data.events)
+            })
+    }, [])
+
+    const handleResize = (e) => {
+        setWindowSize({
+            width: window.innerWidth,
+            height: window.innerHeight
+        })
+    }
 
     return (
         <>
+            <div className="absolute h-screen w-full overflow-hidden">
+                <Confetti
+                    width={windowSize.width}
+                    height={windowSize.height}
+                />
+            </div>
             <section
                 className="py-24 max-w-7xl mx-auto px-16 lg:px-8 w-full bg-white h-screen relative flex flex-col justify-center">
+
                 <div className="relative z-10">
                     <div className="">
                         <h1 className={'text-base lg:text-2xl mb-8 text-purple-600'}>
@@ -26,20 +62,20 @@ const LandingPage = (props) => {
                     </div>
 
                     <div className="">
-                        <div className="h-20 w-3/4 mb-12 relative">
-                            <input type="text" value={""} onClick={() => props.setOp(true)} onChange={() => props.setOp(true)} className={"w-full h-20 px-4 py-2 rounded-lg outline-none border border-gray-600"} />
-                            <span className="absolute text-5xl top-1/2 transform -translate-y-1/2 right-6 text-gray-600"><FontAwesomeIcon icon={faSearch} /></span>
+                        <div className="lg:h-20 w-full lg:w-3/4 mb-4 lg:mb-12 relative">
+                            <input type="text" value={""} onClick={() => props.setOp(true)} onChange={() => props.setOp(true)} className={"w-full lg:h-20 px-4 py-2 rounded-lg outline-none border border-gray-600"} />
+                            <span className="absolute text-2xl lg:text-5xl top-1/2 transform -translate-y-1/2 right-6 text-gray-600"><FontAwesomeIcon icon={faSearch} /></span>
                         </div>
-                        <div className="bg-gray-200 h-20 w-2/4" />
+                        <div className="bg-gray-200 h-10 lg:h-20 w-3/4 lg:w-2/4 rounded" />
                     </div>
                 </div>
                 <div
                     className="absolute w-11/12 lg:w-2/4 top-1/2 right-1/2 lg:right-8 transform translate-x-1/2 lg:translate-x-0 -translate-y-1/2 z-0">
-                    <img src={backdrop} className={'w-full lg:w-2/3 lg:ml-auto'} alt={'Backdrop image'} />
+                    <img src={backdrop} className={'hidden lg:block w-full lg:w-2/3 lg:ml-auto'} alt={'Backdrop image'} />
                 </div>
             </section>
 
-            <section className={'bg-gray-200 py-12 px-4 w-full bg-white relative px-16'} style={{ maxHeight: "100vh" }}>
+            <section className={'bg-purple-50 py-12 px-4 w-full bg-white relative px-16'} style={{ maxHeight: "100vh" }}>
                 <div className="max-w-7xl mx-auto">
                     <h1 className={'font-extrabold text-2xl lg:text-4xl mb-8'}>The Lineup of Events</h1>
 
@@ -50,11 +86,16 @@ const LandingPage = (props) => {
 
                         <div className="my-8 md:my-0 overflow-y-scroll h-full py-4 md:py-0 col-span-8 no-scrollbar"
                             style={{ maxHeight: "560px" }}>
-                            <div className="bg-black w-full h-12 lg:h-24 mb-2" />
-                            <div className="bg-black w-full h-12 lg:h-24 mb-2" />
-                            <div className="bg-black w-full h-12 lg:h-24 mb-2" />
-                            <div className="bg-black w-full h-12 lg:h-24 mb-2" />
-                            <div className="bg-black w-full h-12 lg:h-24 mb-2" />
+                            {
+                                events.map((i, k) =>
+                                    <div key={k} className="bg-white px-8 py-4 border border-purple-200 ">
+                                        <h1 class="title-font text-lg font-black text-grey-900 mb-3 capitalize">{i.title}</h1>
+                                        <h2 class="tracking-widest mb-2 text-xs title-font text-grey-600 mb-1 text-light">{i.subtitle}</h2>
+
+                                        <a className="text-xs underline text-purple-600" href={i.link}>{i.link === "/" ? "Home" : i.link}</a>
+                                    </div>
+                                )
+                            }
                         </div>
                     </div>
                 </div>
@@ -96,11 +137,7 @@ const LandingPage = (props) => {
                     <h1 className='text-xl font-bold mb-4'>The MANTRA Remains</h1>
 
                     <h3>
-                        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquam at autem culpa
-                        exercitationem, fugiat in magnam maiores nam officia possimus quas, quisquam rerum
-                        voluptatem. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aspernatur ducimus error
-                        id iusto molestiae mollitia sit velit vero! Aliquam asperiores ea est et id incidunt ipsum
-                        magni, possimus quasi sint!
+                        To create knowledge and restore the dignity of the black race via  Human Development and Total Man Concept-driven curricula; employing innovative, leading-edge teaching and learning methods, research, and professional services that promote integrated, life-applicable, life-transforming education relevant to Science, Technology, and Human Capacity Building.
                     </h3>
                 </div>
 

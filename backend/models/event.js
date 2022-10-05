@@ -15,6 +15,16 @@ const event = new Schema({
         type: String,
         required: true
     },
+    link: {
+      type: String,
+      required: true,
+      default: "/"  
+    },
+    date: {
+        type: String,
+        required: true,
+        default: "..."
+    },
     created_at: {
         type: String,
         required: true,
