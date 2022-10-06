@@ -75,20 +75,19 @@ const LandingPage = (props) => {
                 </div>
             </section>
 
-            <section className={'bg-purple-50 py-12 px-4 w-full bg-white relative px-16'} style={{ maxHeight: "100vh" }}>
+            <section className={'bg-purple-50 py-12 px-4 w-full bg-white relative md:px-16'} style={{ maxHeight: "100vh" }}>
                 <div className="max-w-7xl mx-auto">
                     <h1 className={'font-extrabold text-2xl lg:text-4xl mb-8'}>The Lineup of Events</h1>
 
                     <div className="w-full grid grid-cols-1 gap-2 md:grid-cols-12">
-                        <div className="w-full bg-gray-600 h-72 lg:h-96 col-span-4 pr-12">
+                        <div className="w-full bg-gray-600 h-72 lg:h-96 mx-auto col-span-4 pr-12">
 
                         </div>
 
-                        <div className="my-8 md:my-0 overflow-y-scroll h-full py-4 md:py-0 col-span-8 no-scrollbar"
-                            style={{ maxHeight: "560px" }}>
+                        <div className="my-4 md:my-0 overflow-y-scroll h-full py-4 md:py-0 col-span-8 no-scrollbar">
                             {
                                 events.map((i, k) =>
-                                    <div key={k} className="bg-white px-8 py-4 border border-purple-200 ">
+                                    <div key={k} className="bg-white px-2 lg:px-8 py-4 border border-purple-200 ">
                                         <h1 class="title-font text-lg font-black text-grey-900 mb-3 capitalize">{i.title}</h1>
                                         <h2 class="tracking-widest mb-2 text-xs title-font text-grey-600 mb-1 text-light">{i.subtitle}</h2>
 
