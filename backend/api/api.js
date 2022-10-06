@@ -4,7 +4,7 @@ const router = express.Router()
 const Information = require('../models/information')
 
 router.post('/', (req, res) => {
-    const {title, data} = req.body;
+    const { title, data } = req.body;
     const newInfo = new Information({
         title: title,
         data: data
@@ -24,9 +24,10 @@ router.post('/', (req, res) => {
 })
 
 router.get('/:title', (req, res) => {
-    const title= req.params.title
+    const title = req.params.title
+    // console.log(title)
 
-    Information.findOne({title: title}, (err, info) => {
+    Information.findOne({ title: title }, (err, info) => {
         res.json(info)
     })
 })

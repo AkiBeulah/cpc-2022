@@ -145,7 +145,7 @@ const Header = (props) => {
                                     <>
                                         <ul id="headerLinks"
                                             className={"flex flex-col transition-all duration-300 lg:justify-center lg:items-center lg:flex-row list-none lg:ml-auto"}>
-                                            <HeaderLink link={'/about'}             text={'About'}              scroll={scroll} scrollLimit={scrollLimit} />
+                                            {/* <HeaderLink link={'/about'}             text={'About'}              scroll={scroll} scrollLimit={scrollLimit} /> */}
                                             <HeaderLink link={'/events'}            text={'Events'}             scroll={scroll} scrollLimit={scrollLimit} />
                                             <HeaderLink link={'/portrait-pictures'} text={'Portrait Pictures'}  scroll={scroll} scrollLimit={scrollLimit} />
                                             <HeaderLink link={'/souvenirs'}         text={'Souvenirs'}          scroll={scroll} scrollLimit={scrollLimit} />

@@ -11,6 +11,7 @@ import VotingConfirmation from "./public/wings_awards/wingsConfirmation"
 import {useState} from "react";
 import Modal from 'react-modal'
 import Souvenirs from "./public/sovenirs";
+import Events from "./public/events";
 
 function App() {
     const [op, setOp] = useState(false)
@@ -26,6 +27,7 @@ function App() {
                     <Route path="wings_confirmation/:id" element={<VotingConfirmation />} />
                     <Route path="/portrait-pictures" element={<Portrait/>}/>
                     <Route path="/souvenirs" element={<Souvenirs/>}/>
+                    <Route path="/events" element={<Events />}/>
                     {/**There's an issue with this particular route */}
                     <Route path="/pictures/:collegeName" element={<Pictures/>}/>
                 </Route>
