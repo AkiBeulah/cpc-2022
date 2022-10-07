@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from "react";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
-import {faChevronLeft, faChevronRight, faLink, faThumbsUp, faTimes} from "@fortawesome/free-solid-svg-icons";
+import {faChevronLeft, faChevronRight, faLink, faSpinner, faThumbsUp, faTimes} from "@fortawesome/free-solid-svg-icons";
 import axios from "axios";
 import Modal from "react-modal";
 import {faInstagram, faTwitter} from "@fortawesome/free-brands-svg-icons";
@@ -8,6 +8,7 @@ import {faInstagram, faTwitter} from "@fortawesome/free-brands-svg-icons";
 var qs = require('qs');
 
 const Voting = () => {
+    const [loading, setLoading] = useState(false)
     const [red, setRed] = useState(false)
     const [formData, setFormData] = useState({
         email: "",
@@ -65,8 +66,9 @@ const Voting = () => {
 
     const submit = () => {
         let emailRegEx = new RegExp('[a-zA-Z]+.[a-zA-Z]+@(stu.cu.edu.ng|covenantuniversity.edu.ng)')
+        setLoading((true))
 
-        if (Object.keys(formData.data).length === 16 && emailRegEx.test(formData.email)) {
+        if (/*Object.keys(formData.data).length === 16 && */emailRegEx.test(formData.email)) {
             axios.post(
                 '/api/voting/',
                 qs.stringify({
@@ -76,14 +78,17 @@ const Voting = () => {
                 {headers: {'content-type': 'application/x-www-form-urlencoded'}}
             )
                 .then(() => {
+                    setLoading(false)
                     alert('You have successfully submitted your votes, please check your email for a confirmation link within the next hour, if not please try again.\nPlease you can only vote once!')
                     window.location.href = "/"
                 })
                 .catch(() => {
+                    setLoading(false)
                     alert('Something seems to have gone wrong, you may have used this email to vote already. \nPlease contact a CPC executive on any of the official platforms if problem persists.')
                 })
         } else {
-            alert("Please make sure to use a Covenant University Email an to vote for each category!")
+            setLoading(false)
+            alert("Please make sure to use a Covenant University Email and to vote for each category!")
         }
     }
     const findPos = (obj) => {
@@ -137,7 +142,7 @@ const Voting = () => {
                         className={`flex flex-row lg:grid lg:grid-cols-3`}>
                         {wingsDetails[modalData.title] !== undefined &&
                             wingsDetails[modalData.title].map((i, k) =>
-                                <div className={'wings-radio-input mr-4 lg:mr-0'}>
+                                <div key={k} className={'wings-radio-input mr-4 lg:mr-0'}>
                                     <input
                                         id={i.name.replaceAll(" ", "_")}
                                         className={'hidden'}
@@ -180,7 +185,7 @@ const Voting = () => {
                 <div className="w-full flex flex-row justify-between mt-8 font-extrabold text-xs">
                     {wingsDetails[modalData.title] !== undefined &&
                         <>
-                        <span className={'cursor-pointer capitalize flex flex-row items-center'}
+                        <span style={{minHeight: "80px"}} className={'w-1/2 cursor-pointer capitalize flex flex-row items-center'}
                               onClick={() => updateModalData(
                                   "title",
                                   (Object.keys(wingsDetails).indexOf(modalData.title) - 1 < 0) ?
@@ -196,7 +201,7 @@ const Voting = () => {
                                     Object.keys(wingsDetails)[Object.keys(wingsDetails).indexOf(modalData.title) - 1]).replaceAll(" ", "<br/>")
                             }}/>
                         </span>
-                            <span className={'cursor-pointer capitalize flex flex-row items-center text-right'}
+                            <span style={{minHeight: "80px"}} className={'w-1/2 cursor-pointer capitalize flex flex-row items-center text-right justify-end'}
                                   onClick={() => updateModalData(
                                       "title",
                                       (Object.keys(wingsDetails).indexOf(modalData.title) + 1 >= Object.keys(wingsDetails).length) ?
@@ -288,8 +293,9 @@ const Voting = () => {
             </section>
 
             <div className={'max-w-7xl mx-auto p-8'}>
-                <button onClick={submit}
-                        className={'bg-gray-900 mx-auto text-xl transition-all duration-300 py-2 px-4 ' + (Object.keys(formData.data).length === 16 ? " w-fit text-white rounded-lg mx-auto font-extrabold" : "w-full text-gray-800")}>Submit
+                <button onClick={submit} style={{minWidth: "100px", minHeight: "45px"}}
+                        className={'bg-gray-900 mx-auto text-xl transition-all duration-300 py-2 px-4 ' + (Object.keys(formData.data).length === 16 ? " w-fit text-white rounded-lg mx-auto font-extrabold" : "w-full text-gray-800")}>
+                            {!loading ? "Submit" :  <FontAwesomeIcon className={'animate-spin'} icon={faSpinner} />}
                 </button>
             </div>
         </>

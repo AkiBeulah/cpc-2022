@@ -1,4 +1,4 @@
-import {Route, Routes} from "react-router-dom";
+import { Route, Routes } from "react-router-dom";
 import './App.css';
 import Home from "./public/home";
 import Header from "./component/header.component";
@@ -16,19 +16,21 @@ function App() {
     Modal.setAppElement('#root');
 
     return (
-        <div>
+        <>
             <Header op={op} setOp={setOp} />
             <Routes>
-                <Route path="/" element={<Home op={op} setOp={setOp} />}/>
-                <Route path="/wings" element={<Voting />}/>
-                <Route path="/wings_confirmation/:id" element={<VotingConfirmation />}/>
-                <Route path="/portrait-pictures" element={<Portrait/>}/>
-                <Route path="/souvenirs" element={<Souvenirs/>}/>
-                {/**There's an issue with this particular route */}
-                <Route path="/pictures/:collegeName" element={<Pictures/>}/>
+                <Route path="/" element={<Home op={op} setOp={setOp} />}>
+                    <Route index element={<LandingPage op={op} setOp={setOp} />} />
+                    <Route path="wings" element={<Voting />} />
+                    <Route path="wings_confirmation/:id" element={<VotingConfirmation />} />
+                    <Route path="/portrait-pictures" element={<Portrait/>}/>
+                    <Route path="/souvenirs" element={<Souvenirs/>}/>
+                    {/**There's an issue with this particular route */}
+                    <Route path="/pictures/:collegeName" element={<Pictures/>}/>
+                </Route>
             </Routes>
             <Footer />
-        </div>
+        </>
     );
 }
 
