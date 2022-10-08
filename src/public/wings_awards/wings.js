@@ -74,7 +74,7 @@ const Voting = () => {
         }
     }, [red])
     useEffect(() => {
-        let emailRegEx = new RegExp('[a-zA-Z]+.[a-zA-Z]+@(stu.cu.edu.ng|covenantuniversity.edu.ng)')
+        let emailRegEx = new RegExp('[a-zA-Z]+.[a-zA-Z]+@(cu.edu.ng|stu.cu.edu.ng|covenantuniversity.edu.ng)')
 
         if (emailRegEx.test(formData.email)) {
             window.scroll(0, findPos(document.querySelector("#cats")))
@@ -82,7 +82,7 @@ const Voting = () => {
     }, [formData])
 
     const submit = () => {
-        let emailRegEx = new RegExp('[a-zA-Z]+.[a-zA-Z]+@(stu.cu.edu.ng|covenantuniversity.edu.ng)')
+        let emailRegEx = new RegExp('[a-zA-Z]+.[a-zA-Z]+@(cu.edu.ng|stu.cu.edu.ng|covenantuniversity.edu.ng)')
         setLoading((true))
 
         if (/*Object.keys(formData.data).length === 16 && */emailRegEx.test(formData.email)) {
@@ -267,10 +267,10 @@ const Voting = () => {
                             </h1>
 
                             <p>
-                                The voting begins with entering your Covenant University Email address (@stu.cu.edu.ng or
+                                The voting begins with entering your Covenant University Email address (@cu.edu.ng, @stu.cu.edu.ng or
                                 @covenantuniversity.edu.ng), then you'd be allowed to vote on each category.
                                 <br />
-                                You can only pick on person per category though, and you must select someone from each category.
+                                You can only pick one person per category though, and you must select someone from each category.
                                 <br />
                                 Upon submission of your votes, you receive an email to confirm your affiliation to the university.
                                 (Don't worry, it's just a redirect.)
@@ -456,7 +456,7 @@ const Voting = () => {
                     :
                     <div className={'max-w-7xl mx-auto p-8'}>
                         <button onClick={submit} style={{ minWidth: "100px", minHeight: "45px" }}
-                            className={'bg-gray-900 mx-auto text-xl transition-all duration-300 py-2 px-4 ' + (Object.keys(formData.data).length === 16 ? " w-fit text-white rounded-lg mx-auto font-extrabold" : "w-full text-gray-800")}>
+                            className={'bg-gray-900 mx-auto text-xl transition-all duration-300 py-2 px-4 ' + (Object.keys(formData.data).length === 16 ? " w-fit text-white rounded-lg mx-auto font-extrabold" : "w-full text-white")}>
                             {!loading ? "Submit" : <FontAwesomeIcon className={'animate-spin'} icon={faSpinner} />}
                         </button>
                     </div>

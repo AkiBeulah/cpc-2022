@@ -3,7 +3,15 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSearch } from "@fortawesome/free-solid-svg-icons";
 import Confetti from 'react-confetti'
 
-import backdrop from '../assets/images/backdrop.webp'
+import backdrop from '../assets/images/fayo.png'
+import kufo from '../assets/images/kufo.png'
+import lara from '../assets/images/lara.png'
+import man_project from '../assets/images/man_project.png'
+import girl_sitting from '../assets/images/girl_sitting.png'
+import insta from '../assets/images/insta.png'
+import twitter from '../assets/images/twitter.png'
+import group7 from '../assets/images/group7.svg'
+import image4 from '../assets/images/image4.svg'
 import { useEffect } from "react";
 import { useState } from "react";
 import axios from "axios";
@@ -75,16 +83,16 @@ const LandingPage = (props) => {
                 </div>
             </section>
 
-            <section className={'bg-purple-50 py-12 px-4 w-full bg-white relative md:px-16'} style={{ maxHeight: "100vh" }}>
+            <section className={'bg-purple-50 py-12 px-4 w-full bg-white relative md:px-16'}>
                 <div className="max-w-7xl mx-auto">
                     <h1 className={'font-extrabold text-2xl lg:text-4xl mb-8'}>The Lineup of Events</h1>
 
                     <div className="w-full grid grid-cols-1 gap-2 md:grid-cols-12">
-                        <div className="w-full bg-gray-600 h-72 lg:h-96 mx-auto col-span-4 pr-12">
-
+                        <div className="w-full mx-auto col-span-4">
+                            <img src={group7} alt="Events banner" className="w-full" />
                         </div>
 
-                        <div className="my-4 md:my-0 overflow-y-scroll h-full py-4 md:py-0 col-span-8 no-scrollbar">
+                        <div className="my-4 md:my-0 overflow-y-scroll py-4 md:py-0 col-span-8 no-scrollbar">
                             {
                                 events.map((i, k) =>
                                     <div key={k} className="bg-white px-2 lg:px-8 py-4 border border-purple-200 ">
@@ -104,11 +112,11 @@ const LandingPage = (props) => {
                 <div className="grid mb-12 grid-cols-1 lg:grid-cols-2 lg:gap-8">
                     <div className="grid grid-cols-2 mb-5 lg:mb-0 gap-2">
                         <div className="flex flex-col">
-                            <div className="w-full h-36 lg:h-52 mb-4 lg:mb-2 bg-gray-200" />
-                            <div className="w-10/12 h-32 lg:h-44 ml-auto bg-gray-200" />
+                            <img src={kufo} className="w-10/12 mb-4 ml-auto lg:mb-2" alt="Kuforiji" />
+                            <img src={girl_sitting} className="w-8/12 mb-4 ml-auto" alt="Kuforiji" />
                         </div>
                         <div className="">
-                            <div className="w-full h-72 lg:h-96 bg-gray-200" />
+                            <img src={lara} className="w-10/12 mb-4 ml-auto" alt="Lara" />
                         </div>
                     </div>
 
@@ -141,12 +149,8 @@ const LandingPage = (props) => {
                 </div>
 
                 <div className='grid grid-cols-1 lg:grid-cols-2 my-12 lg:my-16'>
-                    <div className="grid grid-cols-2 gap-2.5 lg:gap-6 bg-gray-800 p-2.5 lg:p-6">
-                        <div className="w-full h-36 bg-gray-200" />
-                        <div className="w-full h-36 bg-gray-200" />
-                        <div className="w-full h-36 bg-gray-200" />
-                        <div className="w-full h-36 bg-gray-200" />
-                    </div>
+                    <img src={man_project} className="w-10/12 mb-4 ml-auto" alt="Lara" />
+
 
                     <div className="p-8 lg:flex flex-col justify-center">
                         <h1 className='font-extrabold text-2xl py-2 lg:text-5xl'>
@@ -163,8 +167,9 @@ const LandingPage = (props) => {
                     </div>
                 </div>
 
-                <div className='grid grid-cols-1 lg:flex flex-row-reverse'>
-                    <div className="grid grid-cols-2 h-72 lg:w-1/2 gap-2.5 bg-gray-800 p-2.5">
+                <div className='grid grid-cols-1 lg:flex flex-row-reverse lg:items-center'>
+                    <div className="w-full mx-auto col-span-4">
+                        <img src={image4} alt="Events banner" className="w-full lg:w-2/3 mx-auto" />
                     </div>
 
                     <div className="py-8 pr-8 lg:w-1/2">
@@ -187,11 +192,8 @@ const LandingPage = (props) => {
                 <h1 className="text-xl font-extrabold text-center">Enquiries</h1>
 
                 <div className={'flex flex-row justify-between py-12 w-full max-w-2xl mx-auto'}>
-                    <div className="bg-gray-800 rounded-full w-12 h-12" />
-                    <div className="bg-gray-800 rounded-full w-12 h-12" />
-                    <div className="bg-gray-800 rounded-full w-12 h-12" />
-                    <div className="bg-gray-800 rounded-full w-12 h-12" />
-                    <div className="bg-gray-800 rounded-full w-12 h-12" />
+                    <a href="https://www.instagram.com/the17thsetcu/"><img src={insta} alt="Instagram link" /></a>
+                    <a href="https://instagram.com/"><img src={twitter} alt="twitter link" /></a>
                 </div>
             </section>
         </>

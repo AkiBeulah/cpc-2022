@@ -9,7 +9,7 @@ const handlebars = require('handlebars');
 const fs = require('fs');
 const path = require('path');
 
-const emailRegEx = new RegExp('[a-zA-Z]+.[a-zA-Z]+@(stu.cu.edu.ng|covenantuniversity.edu.ng)')
+const emailRegEx = new RegExp('[a-zA-Z]+.[a-zA-Z]+@(cu.edu.ng|stu.cu.edu.ng|covenantuniversity.edu.ng)')
 // const matricNoRegEx = new RegExp("[0-9]{2}[a-zA-Z]{2}[0-9]{5,6}\\b")
 router.post('/', (req, res) => {
     const { email, data } = req.body;
